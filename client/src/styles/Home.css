@@ -1,0 +1,10 @@
+.cont-home {
+    color: white;
+}
+
+.Game {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgba(125, 32, 202, 0.877);
+}

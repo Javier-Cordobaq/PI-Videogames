@@ -1,0 +1,14 @@
+/* .buscador {
+    background-color: blueviolet;
+} */
+
+.searchbar {
+    outline: none;
+    border: none;
+    height: 2rem;
+}
+
+.agregar {
+    border: none;
+    height: 2rem;
+}

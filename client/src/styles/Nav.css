@@ -1,0 +1,14 @@
+.Nav {
+    background-color: rgba(126, 32, 202, 0.726);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Nav p {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    padding: 0;
+}

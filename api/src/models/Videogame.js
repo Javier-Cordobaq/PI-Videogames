@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
 
-    lanzamiento: {
+    released: {
       type: DataTypes.DATEONLY
     },
 
@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
+
+    image: {
+      type : DataTypes.STRING
+    }
 
   }, { 
     timestamps:false
