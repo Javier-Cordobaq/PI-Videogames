@@ -1,18 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { getAll } from '../redux/actions';
+import Nav from './Nav';
+import CardvideoGame from './CardVideoGame'
 import '../styles/Home.css'
 
+
 const Home = () => {
+  let dispatch = useDispatch();  
+  const videojuegos = useSelector(state => state.videogames);
+  const [ loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAll());
+    setLoading(true)
+  }, []);
+  
+  console.log(videojuegos)
+
   return (
-  <div className='cont-home'>
-      <h1>Bienvenido a CoJuegos</h1>
-      <Link to='/mor:id' style={{ textDecoration: 'none' }}>
-      <div className='Game'>
-          <h1>GTA 5</h1>
-      </div>
-      </Link>
-  </div>
-  );
+
+    <div>
+      <Nav/>
+      {
+        loading ? (
+          <div className='cont-home'>
+            {
+              videojuegos?.map(c => <CardvideoGame
+              name={c.name}
+              img={c.image}
+              genres={c.genres}
+              key={c.id}
+              />)
+            }
+          </div>
+        )
+        : (<div>esta cargando</div>)
+      }
+    </div>
+    );
 };
 
 export default Home;

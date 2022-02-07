@@ -1,25 +1,22 @@
 import axios from 'axios'
 
-const GET_ALL_GAMES = 'GET_ALL_GAMES'
-const GET_DB = 'GET_DB'
-const GET_GAMES_BY_NAME = 'GET_GAMES_BY_NAME'
-const GET_GAMES_BY_ID = 'GET_GAMES_BY_ID'
-const CREATE_GAME = 'CREATE_GAME'
-const GET_GENRE = 'GET_GENRE'
+export const GET_ALL_GAMES = 'GET_ALL_GAMES'
+export const GET_DB = 'GET_DB'
+export const GET_GAMES_BY_NAME = 'GET_GAMES_BY_NAME'
+export const GET_GAMES_BY_ID = 'GET_GAMES_BY_ID'
+export const CREATE_GAME = 'CREATE_GAME'
+export const GET_GENRE = 'GET_GENRE'
 
-const getAll = () => async dispatch => {
+export const getAll = () => async dispatch => {
+  let json = await axios.get('http://localhost:3001/');
+      dispatch({
+        type: GET_ALL_GAMES,
+        payload: json.data,
+      });
+    
+};
 
-    return await axios.get('http://localhost:3001/')
-    .then((response) => {
-        dispatch({
-          type: GET_ALL_GAMES,
-          payload: response.data,
-        });
-      });  
-
-}
-
-const getDb = () => async dispatch => {
+export const getDb = () => async dispatch => {
 
     return await axios.get('http://localhost:3001/database')
     .then((response) => {
@@ -31,9 +28,9 @@ const getDb = () => async dispatch => {
 
 }
 
-const getGamesByName = () => async dispatch => {
+export const getGamesByName = (name) => async dispatch => {
 
-    return await axios.get('http://localhost:3001/videogames')
+    return await axios.get(`http://localhost:3001/videogames?name=${name}`)
     .then((response) => {
         dispatch({
           type: GET_GAMES_BY_NAME,
@@ -43,7 +40,7 @@ const getGamesByName = () => async dispatch => {
 
 }
 
-const getGamesById = (id) => async dispatch => {
+export const getGamesById = (id) => async dispatch => {
 
     return await axios.get(`http://localhost:3001/videogame/${id}`)
     .then((response) => {
@@ -55,7 +52,7 @@ const getGamesById = (id) => async dispatch => {
 
 }
 
-const CreateGame = () => async dispatch => {
+export const CreateGame = () => async dispatch => {
 
     return await axios.get(`http://localhost:3001/create`)
     .then((response) => {
@@ -67,7 +64,7 @@ const CreateGame = () => async dispatch => {
 
 }
 
-const getGenre = () => async dispatch => {
+export const getGenre = () => async dispatch => {
 
     return await axios.get(`http://localhost:3001/genre`)
     .then((response) => {

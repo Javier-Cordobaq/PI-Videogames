@@ -1,0 +1,1 @@
+1. Nos falta agregar una ruta para solo traer los juegos de la API

@@ -12,17 +12,11 @@ function App() {
 
     <div className="App">
 
-      <Route path='/home'>
-        <Nav/>
-      </Route>
-
       <Route exact path='/'>
         <LandingPage/>
       </Route>
 
-      <Route exact path='/home'>
-        <Home/>
-      </Route>
+      <Route exact path='/home' component={Home}/>
 
       <Route path='/CrearJuego'>
         <CrearJuego/>

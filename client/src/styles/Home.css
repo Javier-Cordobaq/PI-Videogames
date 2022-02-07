@@ -1,4 +1,6 @@
 .cont-home {
+    display: flex;
+    justify-content: space-around;
     color: white;
 }
 
