@@ -7,13 +7,18 @@ const { Op } = require('sequelize');
 const info = async ()=> {
     try{
     
-    let gamesShowed = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe')
+    /* let gamesShowed = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe') */
+
+    let gamesShowed1 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=40&page=1')
+    let gamesShowed2 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=40&page=2')
+    let gamesShowed3 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=20&page=3')
+    let gamesShowed = gamesShowed1.data.results.concat(gamesShowed2.data.results.concat(gamesShowed3.data.results))
    
-/*     let date = await Promise.all([gamesShowed]); 
+/*   let date = await Promise.all([gamesShowed]); 
 
     gamesShowed = date.data.results; */  
     
-    let game = gamesShowed.data.results;
+    let game = gamesShowed;
     
     game = game.map((result) => {
         return {
@@ -29,7 +34,7 @@ const info = async ()=> {
     });
     let games = []; 
 
-    for(let i = 0; i < 2; i++){
+    for(let i = 0; i < 100; i++){
         games.push(game[i]);
 
     }
@@ -70,8 +75,14 @@ const apiInfoByName = async (name) => {
             genres: i.genres.map(e => e.name),
         }
     });
-    
-    return mapInfo;
+
+    let games = []
+
+    for(let i = 0; i < 15; i++){
+        games.push(mapInfo[i]);
+
+    }
+    return games;
 }
 const apiInfoByid = async (id) => {
     let infoId = await axios.get(`https://api.rawg.io/api/games/${id}?key=731a52844e584332afddedad200f4ebe`);
@@ -88,7 +99,6 @@ const apiInfoByid = async (id) => {
             platforms: infoIds.platforms.map(e => e.platform.name),
             genres: infoIds.genres.map(e => e.name),
         }
-    
         
 }
 
@@ -146,7 +156,10 @@ router.get('/videogame/:id', async (req, res) => {
                 
                 include: {
                     model:  Genre,
-                    attributes: ['name'],
+                    /* as: "genres", */
+                    attributes: ['name'], 
+                   /*  raw: true,
+                    nest: true, */
                 through:{
                 attributes: []
             }
@@ -163,7 +176,7 @@ router.get('/videogame/:id', async (req, res) => {
                 res.json(apiGames)
                 
                 /* const totalGames = dbGames.concat(apiGames)
-            res.json(totalGames); */
+                res.json(totalGames); */
         } catch (error) {
             console.log(error)
         }}

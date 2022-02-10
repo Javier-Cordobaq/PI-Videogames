@@ -1,0 +1,12 @@
+.cont-landing {
+    background-image: url('../Media/2872.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+.btn-landing {
+    border: none;
+    background-color: aqua;
+}

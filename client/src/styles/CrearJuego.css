@@ -1,0 +1,11 @@
+.cont-form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 10rem 20rem;
+}
+
+.input-form {
+    margin: 1rem 0;
+}

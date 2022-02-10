@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { getGamesByName } from '../redux/actions'
 import '../styles/SearchBar.css'
@@ -7,22 +7,30 @@ import '../styles/SearchBar.css'
 const SearchBar = () => {
 
   let dispatch = useDispatch();
-  const [ isLoading, setLoading ] = useState(false);
   const [ state, setState ] = useState('');
 
-  useEffect(() => {
-    dispatch(getGamesByName());
-    setLoading(true)
-  }, [])
+  const onSumbit = (e) =>  {
+    e.preventDefault(); 
+    dispatch(getGamesByName(state))
+   }
+
+  const onChange = (e) => {
+    setState(
+      e.target.value
+    )
+  } 
 
   return (
   <div>
-    <form className='buscador'>
+    <form onSubmit={onSumbit} className='buscador'>
       <input className = 'searchbar'
         type="text"
         placeholder ="Busca un juego..."
+        onChange={onChange}
       />
-      <input className='agregar' type="submit" value="New City" />
+        <input className='agregar' 
+        type="submit" 
+        value="game"/>
     </form>
   </div>)
   ;

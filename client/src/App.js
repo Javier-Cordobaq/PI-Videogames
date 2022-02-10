@@ -3,7 +3,6 @@ import './App.css';
 import { Route } from "react-router-dom"
 import Home from './components/Home.jsx'
 import CrearJuego from './components/CrearJuego';
-import Nav from './components/Nav';
 import MorInfo from './components/MorInfo';
 import LandingPage from './components/LandingPage';
 
@@ -22,7 +21,7 @@ function App() {
         <CrearJuego/>
       </Route>
 
-      <Route path='/mor:id'>
+      <Route exact path='/mor/:id'>
         <MorInfo/>
       </Route>
     

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/LandingPage.css'
 
 const LandingPage = () => {
   return (
-  <div>
-      <Link to='/home'>
-      <button>Home</button>
+  <div className='cont-landing'>
+      <Link to='/home' style={{ textDecoration: 'none' }}>
+      <button className='btn-landing'>Home</button>
       </Link>
   </div>
   );
