@@ -3,10 +3,29 @@
 } */
 
 .searchbar {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    background: none;
     outline: none;
-    border: none;
+    border: 1px solid #E9D8A6;
+    margin-right: 0.5rem;
+    color: #E9D8A6;
+}
+
+.searchbar:focus {
+    color: #001219;
+    background-color: #E9D8A6;
+}
+
+.searchbar::placeholder {
+    color: #E9D8A6;
 }
 
 .agregar {
-    border: none;
+    color: #E9D8A6;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    background: none;
+    outline: none;
+    border: 1px solid #E9D8A6;
 }

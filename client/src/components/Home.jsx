@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getAll } from '../redux/actions';
+import { getAll, FilterByOrder, FilterByRating  } from '../redux/actions';
 import Nav from './Nav';
 import Pagination from './Pagination'
 import CardvideoGame from './CardVideoGame'
+import Spinner from './Spinner';
 import '../styles/Home.css'
 
 const Home = () => {
 
   let dispatch = useDispatch();  
   const videojuegos = useSelector(state => state.videogames);
-  const [ loading, setLoading] = useState(false);
+  /* const [ loading, setLoading] = useState(false); */
 
   //Estados paginación
 
@@ -29,18 +30,37 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAll());
-    setLoading(true)
+   /*  setLoading(true) */
   }, []);
   
   console.log(videojuegos)
 
+  // Filtros ordenar alfabeeticamente y por rating
+
+  const [, setOrder] = useState("");
+  function handleFilter(event) {
+   dispatch(FilterByOrder(event.target.value))
+   setCurrentPage(1)
+   setOrder("Order" + event.target.value);
+}
+
+function handleRating(event) {
+ dispatch(FilterByRating(event.target.value))
+ setCurrentPage(1)
+ setOrder("Order" + event.target.value);
+}
+
+
+
   return (
 
-    <div>
-      <Nav/>
-      <Pagination gamesPerPage={gamesperpage} videojuegos={videojuegos.length} paginate={paginate}/>
+    <div className='global-contHome'>
+      <Nav handleFilter={handleFilter} handleRating={handleRating}/>
+      <Pagination gamesPerPage={gamesperpage} videojuegos={videojuegos.length} currentpage={currentpage} paginate={paginate}/>
       {
-        loading ? (
+        currentGames.length > 0 ? 
+       
+        (
           <div className='cont-home'>
             {
               currentGames?.map((c, index) => <CardvideoGame
@@ -50,13 +70,19 @@ const Home = () => {
               Genres={c.Genres}
               key={index}
               id={c.id}
+              rating={c.rating}
               />)
             }
           </div>
         )
-        : (<div>esta cargando</div>)
+        : 
+        (
+          <div className='spinner-home'>
+          <Spinner/>
+        </div>
+          )
       }
-      <Pagination gamesPerPage={gamesperpage} videojuegos={videojuegos.length} paginate={paginate}/>
+     <Pagination gamesPerPage={gamesperpage} videojuegos={videojuegos.length} currentpage={currentpage} paginate={paginate}/>
     </div>
     );
 };

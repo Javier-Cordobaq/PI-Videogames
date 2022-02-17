@@ -1,10 +1,28 @@
 .cont-home {
+    min-height: 100vh;
     color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
 }
 
-.Game {
-    display: flex;
-    width: 10rem;
-    height: 10rem;
-    background-color: rgba(125, 32, 202, 0.877);
+.global-contHome {
+    min-width: 100%;
+}
+
+.spinner-home {
+    margin-top: 22rem;
+    width: 100%;
+    display: grid;
+    align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+    .cont-home{
+        min-width: 100%;
+        padding: 0;
+        flex-direction: column;
+    }
 }

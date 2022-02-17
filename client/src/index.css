@@ -1,7 +1,23 @@
 body {
-  background-image: url('../src/Media/Fondo\ PI.jpg');
-  min-height: 100vh;
-  background-attachment: fixed;
+  background-image: url('./Media/FondoPIApp.jpg');
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  min-width: 100%;
   margin: 0;
+  font-family: 'PT Sans', sans-serif;
 }
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+  background-image: url('./Media/FondoPIApp.jpg');
+  background-position: right;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: #00607386; 
+  border-radius: 5px;
+}    

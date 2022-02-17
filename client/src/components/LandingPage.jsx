@@ -6,7 +6,8 @@ const LandingPage = () => {
   return (
   <div className='cont-landing'>
       <Link to='/home' style={{ textDecoration: 'none' }}>
-      <button className='btn-landing'>Home</button>
+      <h1 className='btn-landing'>VideogamesCo</h1>
+      <h2 className='btn-explore'>Explore</h2>
       </Link>
   </div>
   );

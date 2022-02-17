@@ -25,12 +25,13 @@ const SearchBar = () => {
     <form onSubmit={onSumbit} className='buscador'>
       <input className = 'searchbar'
         type="text"
-        placeholder ="Busca un juego..."
+        placeholder ="Search for a game.."
         onChange={onChange}
       />
         <input className='agregar' 
         type="submit" 
-        value="game"/>
+        value="Search"
+        />
     </form>
   </div>)
   ;

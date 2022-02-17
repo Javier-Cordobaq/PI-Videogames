@@ -9,10 +9,12 @@ const info = async ()=> {
     
     /* let gamesShowed = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe') */
 
-    let gamesShowed1 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=40&page=1')
-    let gamesShowed2 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=40&page=2')
-    let gamesShowed3 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page_size=20&page=3')
-    let gamesShowed = gamesShowed1.data.results.concat(gamesShowed2.data.results.concat(gamesShowed3.data.results))
+    let gamesShowed1 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe')
+    let gamesShowed2 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page=2')
+    let gamesShowed3 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page=3')
+    let gamesShowed4 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page=4')
+    let gamesShowed5 = await axios.get('https://api.rawg.io/api/games?key=731a52844e584332afddedad200f4ebe&page=5')
+    let gamesShowed = gamesShowed1.data.results.concat(gamesShowed2.data.results).concat(gamesShowed3.data.results).concat(gamesShowed4.data.results).concat(gamesShowed5.data.results)
    
 /*   let date = await Promise.all([gamesShowed]); 
 
@@ -92,9 +94,11 @@ const apiInfoByid = async (id) => {
         return {
             id: infoIds.id,
             name: infoIds.name,
-            description: infoIds.description,
+            description: infoIds.description_raw,
             released: infoIds.released,
             image: infoIds.background_image,
+            image_additional: infoIds.background_image_additional,
+            website: infoIds.website,
             rating: infoIds.rating,
             platforms: infoIds.platforms.map(e => e.platform.name),
             genres: infoIds.genres.map(e => e.name),
@@ -113,7 +117,6 @@ router.get('/database', async (req, res) => {
         
 })
 
-
 router.get('/', async (req, res) => {
     const apiVideogame = await info();
 
@@ -122,6 +125,14 @@ router.get('/', async (req, res) => {
     res.send(dbVideogame.concat(apiVideogame));
 
     
+});
+
+router.get('/Api', async (req, res) => {
+
+    const apiVideogame = await info();
+
+    res.send(apiVideogame);
+
 });
 
 router.get('/videogames', async (req, res) => {
@@ -208,5 +219,28 @@ router.post('/create', async(req, res) => {
         console.log(error)
     }
 });
+
+router.get('/destroy/:id', async (req, res) => {
+
+    const {id} = req.params
+
+    try {
+        await Videogame.destroy({where: {
+            id
+        }});
+
+    /*     res.send('Ha sido destruido correctamente') */
+
+        const apiVideogame = await info();
+
+        const dbVideogame = await infoDB();
+    
+        res.send(dbVideogame.concat(apiVideogame)); 
+
+    } catch (error) {
+        res.status(400).send(error);
+    }
+        
+})
 
 module.exports = router

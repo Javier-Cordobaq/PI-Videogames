@@ -7,6 +7,12 @@ export const GET_GAMES_BY_ID = 'GET_GAMES_BY_ID'
 export const CREATE_GAME = 'CREATE_GAME'
 export const GET_GENRE = 'GET_GENRE'
 export const RESET = 'RESET'
+export const DB_OR_API = "DB_OR_API";
+export const GET_API = 'GET_API'
+export const FILTER_BY_GENRE = 'FILTER_BY_GENRE' 
+export const FILTER_ALPH = "FILTER_ALPH";
+export const FILTER_BY_RATING = 'FILTER_BY_RATING'
+export const DESTROY = 'DESTROY'
 
 export const getAll = () => async dispatch => {
   let json = await axios.get('http://localhost:3001/');
@@ -26,6 +32,30 @@ export const getDb = () => async dispatch => {
           payload: response.data,
         });
       });  
+
+}
+
+export const destroy = (id) => async dispatch => {
+
+  return await axios.get(`http://localhost:3001/destroy/${id}`)
+  .then((response) => {
+      dispatch({
+        type: DESTROY,
+        payload: response.data
+      });
+    });  
+
+}
+
+export const getApi = () => async dispatch => {
+
+  return await axios.get('http://localhost:3001/Api')
+  .then((response) => {
+      dispatch({
+        type: GET_API,
+        payload: response.data,
+      });
+    });  
 
 }
 
@@ -77,6 +107,42 @@ export const reset = () => dispatch => {
   })
 }
 
+// Filtros
+
+export const filterGamesByGenre = (payload) => {
+  return {
+    type: FILTER_BY_GENRE,
+    payload
+  }
+}
+
+export function FilterByOrder(payload) {
+  return async function (dispatch) {
+      try {
+          dispatch ({
+              type: FILTER_ALPH,
+              payload,
+          });
+      }
+      catch (error) {
+          console.log(error)
+      }    
+  }
+}
+
+export function FilterByRating(payload) {
+  return async function (dispatch) {
+      try {
+          dispatch ({
+              type: FILTER_BY_RATING,
+              payload,
+          });
+      }
+      catch (error) {
+          console.log(error)
+      }    
+  }
+}
 
 
 

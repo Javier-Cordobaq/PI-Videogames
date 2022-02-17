@@ -1,12 +1,65 @@
 .cont-landing {
-    background-image: url('../Media/2872.jpg');
+    background-image: url('../Media/FondoLanding.jpg');
     background-size: cover;
+    background-position: center;
     min-height: 100vh;
     display: grid;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn-landing {
-    border: none;
-    background-color: aqua;
+    color: #E9D8A6;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    animation-name: Title;
+    animation-duration: 2s;
 }
+
+.btn-landing:hover {
+    cursor: pointer;
+}
+
+@keyframes Title {
+    0% {
+        margin-left: 20rem;
+        opacity: 20%;
+       
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+.btn-explore {
+    width: 10rem;
+    margin: 0 15rem;
+    padding: 0.5rem 0;
+    border-radius: 50px;
+    background-color: #00121993;
+    color: #E9D8A6;
+    animation-name: Boton;
+    animation-duration: 2s;
+    transition: all 0.5s;
+}
+
+.btn-explore:hover {
+ transform: scale(0.9);
+ background-color: #00070a93;
+}
+
+@keyframes Boton {
+    0% {
+        margin-left: 1rem;
+        opacity: 10%;
+       
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+  
